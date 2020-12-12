@@ -1,2 +1,2 @@
-from app import app
+from yourapp import app
 app.run(debug=True)

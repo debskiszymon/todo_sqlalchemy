@@ -1,6 +1,6 @@
 # app/models.py
 from datetime import datetime
-from app import db
+from yourapp import db
 
 helper = db.Table("helper",
     db.Column("todo_id", db.Integer, db.ForeignKey("todo.id")),

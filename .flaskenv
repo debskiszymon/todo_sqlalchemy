@@ -1,1 +1,1 @@
-FLASK_APP=app/views.py
+FLASK_APP=yourapp/views.py
