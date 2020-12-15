@@ -14,13 +14,15 @@
     <thead>
     <th>Tytuł</th>
     <th>Opis</th>
-    <!-- <th>Czy zrobione?</th> -->
+    <th>Czy zrobione?</th>
     </thead>
 {% for todo in todos %}
     <tr>
         <td><a href="/todos/{{ loop.index }}">{{ todo.name }}</a></td>
         <td>{{ todo.description }}</td>
-        <!-- <td>{{ todo.done }}</td> -->
+        {% for done in todo.done.all() %}
+            <td>{{ done.done }}</td>
+        {% endfor %}
     </tr>
 {% endfor %}
 </table>
@@ -32,9 +34,9 @@
     <p></p>
 {% for user in users %}
     <tr>
-        <td><a href="/todos/{{ loop.index }}">{{ user.user }}</a></td>
+        <td><a href="/todos/user/{{ loop.index }}">{{ user.user }}</a></td>
         {% for todo in user.todo.all() %}
-        <td>{{ todo.name }}</td>
+            <td>{{ todo.name }}</td>
         {% endfor %}
     </tr>
 {% endfor %}
@@ -42,9 +44,9 @@
 <div>
     <h2> Dodaj nowe zadanie: </h2>
     <form method="POST" action="/todos/">
-        {{ form.hidden_tag() }}
+        {{ todo_form.hidden_tag() }}
         <table>
-            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for field in todo_form if field.widget.input_type != 'hidden' %}
                 <tr>
                     <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
                     <td>{{ field }}</td>
@@ -54,5 +56,21 @@
         <input type="submit" value="Go">
     </form>
 </div>
+<div>
+    <h2> Dodaj nowego użytkownika: </h2>
+    <form method="POST" action="/todos/">
+        {{ user_form.hidden_tag() }}
+        <table>
+            {% for field in user_form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Go">
+    </form>
+</div>
+
 </body>
 </html>

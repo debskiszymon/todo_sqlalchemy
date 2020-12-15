@@ -7,9 +7,9 @@
 <body>
     <h2> Zmień: </h2>
     <form method="POST" action="/todos/{{ todo_id }}/">
-        {{ form.hidden_tag() }}
+        {{ todo_form.hidden_tag() }}
         <table>
-            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for field in todo_form if field.widget.input_type != 'hidden' %}
                 <tr>
                     <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
                     <td>{{ field }}</td>
@@ -20,3 +20,4 @@
     </form>
 </body>
 </html>
+

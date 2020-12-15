@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły user</title>
+</head>
+<body>
+    <div>
+        <h2> Dodaj todos do użytkownika: </h2>
+        <form method="POST" action="/todos/user/{{ user_id }}/">
+            {{ user_todo_form.hidden_tag() }}
+            <table>
+                {% for field in user_todo_form if field.widget.input_type != 'hidden' %}
+                    <tr>
+                        <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                        <td>{{ field }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <input type="submit" value="Go">
+        </form>
+    </div>
+</body>
+</html>
+
